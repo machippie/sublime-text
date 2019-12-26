@@ -1,6 +1,6 @@
 # sublime-text
 
-[![Build Status](https://cloud.drone.io/api/badges/machippie/sublime-text/status.svg)](https://cloud.drone.io/machippie/google-chrome)
+[![Build Status](https://cloud.drone.io/api/badges/machippie/sublime-text/status.svg)](https://cloud.drone.io/machippie/sublime-text)
 
 Ansible role to configure sublime-text.
 

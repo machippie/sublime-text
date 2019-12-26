@@ -1,7 +1,7 @@
 # Standards: 0.1
 ---
 # @var sublime_text_user:description: User to run user-specific commands
-# @var sublime_text_user:value: google_chrome_user | default(homebrew_user) | default(ansible_user_id)
+# @var sublime_text_user:value: sublime_text_user | default(homebrew_user) | default(ansible_user_id)
 # sublime_text_user:
 
 # @var sublime_text_started:description: Restart app if already running
