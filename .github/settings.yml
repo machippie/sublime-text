@@ -1,8 +1,8 @@
 ---
 repository:
-  name: google-chrome
-  description: Ansible role for google-chrome
-  homepage: https://machippie.github.io/google-chrome/
+  name: sublime-text
+  description: Ansible role for sublime-text
+  homepage: https://machippie.github.io/sublime-text/
   topics: ansible, role, ansible-role
 
   private: false
