@@ -1,0 +1,49 @@
+# Standards: 0.1
+---
+- name: Fact sublime-text user
+  set_fact:
+    sublime_text_user: "{{ sublime_text_user | default(homebrew_user) | default(ansible_user_id) }}"
+  tags:
+    - sublime-text
+
+- become: "{{ (sublime_text_user != ansible_user_id) | bool }}"
+  become_user: "{{ sublime_text_user }}"
+  block:
+    - name: Install required package
+      ignore_errors: True
+      homebrew_cask:
+        name: sublime-text
+        greedy: True
+        options: appdir=/Applications
+        accept_external_apps: False
+        state: upgraded
+      tags:
+        - sublime-text
+
+    - name: Remove quarantine flag
+      register: sublime_text_quarantine
+      failed_when: sublime_text_quarantine.rc != 0 and "No such xattr" not in sublime_text_quarantine.stderr
+      changed_when: sublime_text_quarantine.rc == 0
+      command: xattr -d com.apple.quarantine /Applications/Sublime\ Text.app
+      tags:
+        - sublime-text
+
+    - name: Install pidof package
+      homebrew:
+        name: pidof
+      tags:
+        - sublime-text
+
+    - name: Check program running
+      register: sublime_text_running
+      command: pidof Sublime\ Text
+      tags:
+        - sublime-text
+
+    - name: Fact program running
+      set_fact:
+        sublime_text_started: "{{ sublime_text_running.stdout_lines | length > 0 | bool }}"
+      tags:
+        - sublime-text
+
+...
